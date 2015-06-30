@@ -10,10 +10,14 @@ ln -s kolla/docker/common/mariadb-app/config-mysql.sh
 ln -s kolla/docker/common/keystone/start.sh keystone-start.sh
 
 ln -s kolla/docker/common/rabbitmq/start.sh rabbit-start.sh
+# BUG in Kolla, this should be in common
+ln -s kolla/docker/centos/rdo/rabbitmq/config-rabbit.sh config-rabbit.sh
+#ln -s kolla/docker/common/rabbitmq/config.sh config-rabbit.sh
 cp kolla/docker/common/rabbitmq/rabbitmq-env.conf /etc/rabbitmq
 cp kolla/docker/common/rabbitmq/rabbitmq.config /etc/rabbitmq
 
-ln -s kolla/docker/common/heat/heat-base/config-heat.sh
+#JPEELER: can probably be removed now that we're actually basing off heat-base
+#ln -s kolla/docker/common/heat/heat-base/config-heat.sh
 ln -s kolla/docker/common/heat/heat-api/start.sh heat-api-start.sh
 ln -s kolla/docker/common/heat/heat-api-cfn/start.sh heat-api-cfn-start.sh
 ln -s kolla/docker/common/heat/heat-engine/start.sh heat-engine-start.sh
@@ -54,9 +58,22 @@ supervisord -c $pscfg
 sleep 5
 
 # configure keystone
-cp /usr/bin/keystone-all /usr/bin/keystone-all-real
-echo 'kill -1 $(<"/var/run/supervisord.pid")' > /usr/bin/keystone-all
-crudini --set $pscfg program:keystone command "keystone-all-real"
+cp /usr/sbin/httpd /usr/sbin/httpd-real
+rm -rf /usr/sbin/httpd
+ln -s /bin/true /usr/sbin/httpd
+
+# this is hacked out of keystone's dockerfile (should be in start.sh)
+mkdir -p /var/www/cgi-bin/keystone
+cp -a /usr/share/keystone/wsgi-keystone.conf /etc/httpd/conf.d
+sed -i 's,/var/log/apache2,/var/log/httpd,' /etc/httpd/conf.d/wsgi-keystone.conf
+sed -i -r 's,^(Listen 80),#\1,' /etc/httpd/conf/httpd.conf
+cp -a /usr/share/keystone/keystone.wsgi /var/www/cgi-bin/keystone/main
+cp -a /usr/share/keystone/keystone.wsgi /var/www/cgi-bin/keystone/admin
+chown -R keystone:keystone /var/www/cgi-bin/keystone
+chmod 755 /var/www/cgi-bin/keystone/*
+
+echo 'kill -1 $(<"/var/run/supervisord.pid")' > /usr/sbin/httpd
+crudini --set $pscfg program:httpd command "/usr/sbin/httpd-real -DFOREGROUND"
 
 ./keystone-start.sh
 
@@ -84,4 +101,6 @@ python setup.py install
 # reload supervisord (executes heat)
 kill -1 $(<"/var/run/supervisord.pid")
 
+/opt/kolla/kolla/tools/genenv
 echo "Heat and dependent services running"
+echo "now execute 'source /openrc'"
