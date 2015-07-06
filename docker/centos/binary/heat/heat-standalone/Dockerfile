@@ -7,25 +7,22 @@ RUN yum -y install openstack-heat-api-cfn \
   openstack-heat-api \
   openstack-heat-engine \
   python-barbicanclient \
-  python-zaqarclient
+  python-zaqarclient \
+  openstack-keystone \
+  python-keystoneclient \
+  httpd \
+  mod_wsgi \
+  mariadb \
+  mariadb-server \
+  MySQL-python \
+  hostname \
+  rabbitmq-server \
+  supervisor \
+  git \
+  && yum clean all
 
-RUN yum -y install openstack-keystone \
-        python-keystoneclient \
-        httpd \
-        mod_wsgi \
-        && yum clean all
-
-RUN yum -y install mariadb \
-    mariadb-server \
-    MySQL-python \
-    hostname \
-
-RUN yum -y install rabbitmq-server hostname
-
-RUN yum -y install supervisor git
 # changed to fork to try and avoid constant breakage
 RUN git clone https://github.com/jpeeler/kolla.git /opt/kolla/kolla
 RUN git clone https://github.com/openstack/heat /opt/heat
 
-COPY standalone.env /opt/kolla/standalone.env
-COPY config.sh /opt/kolla/config.sh
+COPY config.sh standalone.env /opt/kolla/
