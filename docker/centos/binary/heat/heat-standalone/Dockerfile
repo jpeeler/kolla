@@ -25,4 +25,4 @@ RUN yum -y install openstack-heat-api-cfn \
 RUN git clone https://github.com/jpeeler/kolla.git /opt/kolla/kolla
 RUN git clone https://github.com/openstack/heat /opt/heat
 
-COPY config.sh standalone.env /opt/kolla/
+COPY config.sh standalone.env stack-create.sh deploy-undercloud.yaml /opt/kolla/

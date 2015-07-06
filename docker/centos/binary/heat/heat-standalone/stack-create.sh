@@ -1,3 +1,3 @@
 #!/bin/bash
 
-heat stack-create -f deploy-containers.yaml openstack
+heat stack-create -f deploy-undercloud.yaml openstack

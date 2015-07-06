@@ -18,15 +18,19 @@ parameters:
     default: 127.0.0.1
 
 resources:
-  mariadb:
+  mariadb-data:
     type: DockerInc::Docker::Container
     properties:
-      image: kollaglue/centos-rdo-mariadb-app
+      image: kollaglue/centos-rdo-mariadb-data:latest
+      name: mariadb-data
+
+  mariadb-app:
+    type: DockerInc::Docker::Container
+    depends_on: [mariadb-data]
+    properties:
+      image: kollaglue/centos-rdo-mariadb-app:latest
+      volumes_from: [ mariadb-data ]
+      restart_policy: { Name: always }
+      name: mariadb-app
       env: [ 'BIND_ADDRESS={ get_param: MariaBindAddress}',
              'MARIADB_ROOT_PASSWORD={ get_param: MariaRootPassword }' ]
-
-  rabbitmq:
-    type: DockerInc::Docker::Container
-    properties:
-      image: kollaglue/centos-rdo-rabbitmq
-      env: [ 'RABBITMQ_SERVICE_HOST={ get_param: RabbitServiceHost}' ]

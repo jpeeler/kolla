@@ -93,6 +93,8 @@ crudini --set $pscfg program:heat-api command "heat-api"
 crudini --set $pscfg program:heat-api-cfn command "heat-api-cfn"
 crudini --set $pscfg program:heat-engine command "heat-engine"
 
+crudini --set /etc/heat/heat.conf DEFAULT log_file /var/log/heat/heat-standalone.log
+
 # configure heat docker plugin
 pushd /opt/heat/contrib/heat_docker
 pip install docker-py # docker-python package installs more dependencies
