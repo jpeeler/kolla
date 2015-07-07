@@ -1,10 +1,7 @@
 heat_template_version: 2015-04-30
-# instack undercloud: glance, heat, neutron, nova, ironic, tuskar, ceilometer,
-# swift, rabbit
 
-description: |
-  This is a Heat template to deploy example OpenStack services inside Docker
-  containers.
+description: >
+  A template which starts openstack on AtomicOS.
 
 parameters:
   MariaBindAddress:
@@ -18,19 +15,62 @@ parameters:
     default: 127.0.0.1
 
 resources:
-  mariadb-data:
+  heat-docker-agents:
     type: DockerInc::Docker::Container
     properties:
-      image: kollaglue/centos-rdo-mariadb-data:latest
-      name: mariadb-data
+      image: imain/heat-docker-agent:latest
+      name: heat-docker-agent
 
-  mariadb-app:
-    type: DockerInc::Docker::Container
-    depends_on: [mariadb-data]
+  server:
+    type: OS::Nova::Server
     properties:
-      image: kollaglue/centos-rdo-mariadb-app:latest
-      volumes_from: [ mariadb-data ]
-      restart_policy: { Name: always }
-      name: mariadb-app
-      env: [ 'BIND_ADDRESS={ get_param: MariaBindAddress}',
-             'MARIADB_ROOT_PASSWORD={ get_param: MariaRootPassword }' ]
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      key_name: { get_param: key_name }
+
+  openstack_environment_deployment:
+    type: OS::Heat::SoftwareDeployment
+    depends_on: heat-docker-agents
+    properties:
+      config:
+        get_resource: openstack_environment_setup
+      input_values:
+        BIND_ADDRESS: { get_param: MariaBindAddress }
+        MARIADB_ROOT_PASSWORD: { get_param: MariaRootPassword }
+
+  openstack_environment_setup:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+        - name: BIND_ADDRESS 
+        - name: MARIADB_ROOT_PASSWORD
+      config: |
+        #!/bin/bash
+        env > /etc/openstack.env
+
+  UndercloudContainersInstall:
+    type: OS::Heat::SoftwareDeployment
+    depends_on: openstack_environment_setup
+    properties:
+      config:
+        get_resource: Config_undercloud
+
+  Config_undercloud:
+    type: OS::Heat::StructuredConfig
+    properties:
+      group: docker-compose
+      config:
+        mariadbdata:
+          image: kollaglue/centos-rdo-mariadb-data:latest
+          name: mariadbdata
+
+        mariadbapp:
+          image: kollaglue/centos-rdo-mariadb-app:latest
+          name: mariadbapp
+          net: host
+          restart: always
+          env_file:
+           - /etc/openstack.env
+          volumes_from:
+           - mariadbdata
