@@ -1,0 +1,2 @@
+{"os-collect-config": {"cfn": {"stack_name": "overcloud-Compute-nmgt37hy2jbt-0-mvvimv4gmm5h", "metadata_url": "http://192.0.2.1:8000/v1/", "path": "NovaCompute.Metadata", "secret_access_key": "9ea94f2e86aa4c2c90b0c26e85a729d8", "access_key_id": "b671f09696854e39975e9f884af0285c"}}, "deployments": []}
+

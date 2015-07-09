@@ -1,0 +1,330 @@
+{
+  "deployments": [
+    {
+      "inputs": [
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "ADMIN_TENANT_NAME", 
+          "value": "admin", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "DB_ROOT_PASSWORD", 
+          "value": "12345678", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "FLAT_INTERFACE", 
+          "value": "eth0", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "GLANCE_API_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "GLANCE_API_SERVICE_PORT", 
+          "value": "9292", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "HOST_IP", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_ADMIN_PASSWORD", 
+          "value": "adminpass", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_ADMIN_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_ADMIN_SERVICE_PORT", 
+          "value": 35357, 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_ADMIN_TOKEN", 
+          "value": "asdf", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_AUTH_PROTOCOL", 
+          "value": "http", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_DB_PASSWORD", 
+          "value": "kolla", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "KEYSTONE_PUBLIC_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "MARIADB_ROOT_PASSWORD", 
+          "value": "12345678", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "MARIADB_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "METADATA_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "MYSQL_ROOT_PASSWORD", 
+          "value": "12345678", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NETWORK_MANAGER", 
+          "value": "nova", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_API_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_COMPUTE_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_CONDUCTOR_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_DB_NAME", 
+          "value": "nova", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_DB_PASSWORD", 
+          "value": "novapass", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_DB_USER", 
+          "value": "nova", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_EC2_API_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_EC2_COMPUTE_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_EC2_NETWORK_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_EC2_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_KEYSTONE_PASSWORD", 
+          "value": "novapass", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_KEYSTONE_USER", 
+          "value": "nova", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "NOVA_NETWORK_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "PUBLIC_INTERFACE", 
+          "value": "br100", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "PUBLIC_IP", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "default": null, 
+          "type": "String", 
+          "name": "RABBITMQ_SERVICE_HOST", 
+          "value": "127.0.0.1", 
+          "description": null
+        }, 
+        {
+          "type": "String", 
+          "name": "NOVA_VNCSERVER_PROXYCLIENT_ADDRESS", 
+          "value": "127.0.0.1"
+        }, 
+        {
+          "type": "String", 
+          "name": "NOVA_NOVNC_PROXY_SERVICE_HOST", 
+          "value": "0.0.0.0"
+        }, 
+        {
+          "type": "String", 
+          "name": "NOVA_NOVNC_PROXY_PORT", 
+          "value": 6080
+        }, 
+        {
+          "type": "String", 
+          "name": "DEBUG_LOGGING", 
+          "value": false
+        }, 
+        {
+          "type": "String", 
+          "name": "NOVA_VNCSERVER_LISTEN_ADDRESS", 
+          "value": "127.0.0.1"
+        }, 
+        {
+          "type": "String", 
+          "name": "VERBOSE_LOGGING", 
+          "value": true
+        }, 
+        {
+          "type": "String", 
+          "name": "NOVA_NOVNC_BASE_ADDRESS", 
+          "value": "127.0.0.1"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_server_id", 
+          "value": "d4c8a121-3e0f-48f8-ac23-37525b98019b", 
+          "description": "ID of the server being deployed to"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_action", 
+          "value": "CREATE", 
+          "description": "Name of the current action being deployed"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_stack_id", 
+          "value": "openstack/55ae01b7-6662-4158-a044-246fec8b0e1b", 
+          "description": "ID of the stack this deployment belongs to"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_resource_name", 
+          "value": "deployment", 
+          "description": "Name of this deployment resource in the stack"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_signal_transport", 
+          "value": "CFN_SIGNAL", 
+          "description": "How the server should signal to heat with the deployment output values."
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_signal_id", 
+          "value": "http://127.0.0.1:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A8b0ccb1a45a04800ab0048da11110c79%3Astacks%2Fopenstack%2F55ae01b7-6662-4158-a044-246fec8b0e1b%2Fresources%2Fdeployment?Timestamp=2015-07-09T20%3A51%3A23Z&SignatureMethod=HmacSHA256&AWSAccessKeyId=153b39704179440e9cf906a061885a27&SignatureVersion=2&Signature=ak14jJLqnqfnhgjw6mA53pSA7OMsNzHhfepBBaYaftM%3D", 
+          "description": "ID of signal to use for signaling output values"
+        }, 
+        {
+          "type": "String", 
+          "name": "deploy_signal_verb", 
+          "value": "POST", 
+          "description": "HTTP verb to use for signaling output values"
+        }
+      ], 
+      "group": "script", 
+      "name": "openstack-config-vqtip3xaukzp", 
+      "outputs": [], 
+      "creation_time": "2015-07-09T20:51:25", 
+      "options": {}, 
+      "config": "#!/bin/bash\nenv > /etc/openstack.env\n", 
+      "id": "540462b4-a013-4a48-91ad-b55d00ea93cb"
+    }
+  ]
+}
