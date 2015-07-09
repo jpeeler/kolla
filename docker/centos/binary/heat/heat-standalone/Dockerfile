@@ -19,10 +19,13 @@ RUN yum -y install openstack-heat-api-cfn \
   rabbitmq-server \
   supervisor \
   git \
+  patch \
+  docker-io \
   && yum clean all
 
 # changed to fork to try and avoid constant breakage
 RUN git clone https://github.com/jpeeler/kolla.git /opt/kolla/kolla
 RUN git clone https://github.com/openstack/heat /opt/heat
-
-COPY config.sh standalone.env stack-create.sh deploy-undercloud.yaml /opt/kolla/
+COPY config.sh standalone.env start-heat-agent.sh dummy-server.yaml stack-create.sh deploy-undercloud.yaml install_docker_agents.yaml heat.patch undercloud-resource.yaml /opt/kolla/
+COPY fragments/start_docker_agents.sh /opt/kolla/fragments/start_docker_agents.sh
+RUN cat /opt/kolla/heat.patch | (cd /usr/lib/python2.7/site-packages/heat; patch -p1)

@@ -1,0 +1,28 @@
+diff --git a/engine/resources/openstack/heat/software_deployment.py b/engine/resources/openstack/heat/software_deployment.py
+index 79d7258..46eabc7 100644
+--- a/engine/resources/openstack/heat/software_deployment.py
++++ b/engine/resources/openstack/heat/software_deployment.py
+@@ -127,9 +127,9 @@ class SoftwareDeployment(signal_responder.SignalResponder):
+         SERVER: properties.Schema(
+             properties.Schema.STRING,
+             _('ID of Nova server to apply configuration to.'),
+-            constraints=[
+-                constraints.CustomConstraint('nova.server')
+-            ]
++            #constraints=[
++            #    constraints.CustomConstraint('nova.server')
++            #]
+         ),
+         INPUT_VALUES: properties.Schema(
+             properties.Schema.MAP,
+@@ -614,7 +614,9 @@ class SoftwareDeployment(signal_responder.SignalResponder):
+         if server:
+             res = self.stack.resource_by_refid(server)
+             if res:
+-                if not res.user_data_software_config():
++                #if not res.user_data_software_config():
++                if not (res.properties.get('user_data_format') ==
++                        'SOFTWARE_CONFIG'):
+                     raise exception.StackValidationFailed(message=_(
+                         "Resource %s's property user_data_format should be "
+                         "set to SOFTWARE_CONFIG since there are software "

@@ -1,0 +1,4 @@
+resource_registry:
+  # Docker container with heat agents for containerized compute node.
+  # Heat::InstallConfigAgent: install_docker_agents.yaml
+  OS::Dummy::Server: dummy-server.yaml
