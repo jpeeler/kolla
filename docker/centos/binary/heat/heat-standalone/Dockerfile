@@ -20,8 +20,11 @@ RUN yum -y install openstack-heat-api-cfn \
   supervisor \
   git \
   patch \
+  os-collect-config \
+  os-refresh-config \
   docker-io \
-  && yum clean all
+  && yum clean all \
+  && pip install oslo.reports
 
 # changed to fork to try and avoid constant breakage
 RUN git clone https://github.com/jpeeler/kolla.git /opt/kolla/kolla

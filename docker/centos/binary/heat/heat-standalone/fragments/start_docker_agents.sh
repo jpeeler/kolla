@@ -1,6 +1,5 @@
 #!/bin/bash
 set -eux
-
 ## heat-docker-agents service
 #cat <<EOF > /etc/systemd/system/heat-docker-agents.service
 #
